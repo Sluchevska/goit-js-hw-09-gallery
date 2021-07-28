@@ -1,7 +1,8 @@
 
 
 import galleryRef from './gallery-items.js';
-import onScrollImages from './scroll.js';
+// import onScrollImages from './scroll.js';
+
 
 const galleryHolder = document.querySelector('.js-gallery');
 const galleryMarkup = makeGalleryMarkup(galleryRef);
@@ -82,7 +83,7 @@ galleryRef.forEach(item => {
   originImages.push(item.original);
 });
 
-export default onBackdropClick
+// export default onBackdropClick
 const backdrop = document.querySelector('.lightbox__overlay');
 backdrop.addEventListener('click', onBackdropClick);
 
@@ -91,6 +92,31 @@ function onBackdropClick(e) {
     closeModal();
   }
 }
+
+
+function onScrollImages(e) {
+  let index = originImages.indexOf(lightBoxImg.src);
+  if (e.key === 'ArrowRight') {
+    if (index < originImages.length - 1) {
+      lightBoxImg.setAttribute("src", originImages[index + 1])
+    } else {
+      index = -1;
+       lightBoxImg.setAttribute("src", originImages[index + 1])
+      console.log(originImages)
+    }
+  }
+  if (e.key === 'ArrowLeft') {
+    if (index === 0) {
+      index =  originImages.length;
+       lightBoxImg.setAttribute("src", originImages[index - 1]);
+    }else  lightBoxImg.setAttribute("src", originImages[index - 1])
+  }
+}
+
+
+
+
+
 
 
 
